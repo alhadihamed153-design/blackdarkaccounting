@@ -37,6 +37,11 @@ footer{text-align:center;color:#777;margin-top:25px;font-size:13px}
 <p class="sub">بتواضــــــع للدفعة 17 وخـــاصة محاسبة</p>
 
 </header>
+  <div style="text-align:center;background:#111;border:1px solid #00ff88;border-radius:12px;padding:12px;margin:10px 0">
+  👁️ زار الموقع: <b id="visits" style="color:#00ff88">...</b> زول
+  &nbsp; | &nbsp;
+  📥 اتحملت الشيتات: <b id="downloads" style="color:#ffcc00">...</b> مرة
+</div>
 
 <!-- نقود و مصارف -->
 <details open>
@@ -186,6 +191,26 @@ const text="ودالأنصاري"; const el=document.getElementById("type");
 let i=0, deleting=false;
 function loop(){ if(!deleting){ i++; el.textContent=text.slice(0,i); if(i===text.length){deleting=true; setTimeout(loop,1200); return;} setTimeout(loop,150);} else { i--; el.textContent=text.slice(0,i); if(i===0){deleting=false; setTimeout(loop,400); return;} setTimeout(loop,70);} }
 loop();
+</script>
+  <script>
+fetch('https://api.countapi.xyz/hit/alhadihamed153-blackdarkaccounting/visits')
+.then(r=>r.json())
+.then(d=>{ document.getElementById('visits').textContent = d.value; });
+
+fetch('https://api.countapi.xyz/get/alhadihamed153-blackdarkaccounting/downloads')
+.then(r=>r.json()).then(d=>{
+  if(d.value) document.getElementById('downloads').textContent = d.value;
+  else document.getElementById('downloads').textContent = 0;
+});
+
+document.querySelectorAll('a[download]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    fetch('https://api.countapi.xyz/hit/alhadihamed153-blackdarkaccounting/downloads')
+    .then(r=>r.json()).then(d=>{
+      document.getElementById('downloads').textContent = d.value;
+    });
+  });
+});
 </script>
 </body>
 </html>
